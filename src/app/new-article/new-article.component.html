@@ -1,0 +1,53 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="bannerUrl" class="col-sm-2 col-form-label">Banner URL</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="bannerUrl"
+          placeholder="Banner URL"
+          id="bannerUrl">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="col-sm-2 col-form-label">Title</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="title"
+          placeholder="Title"
+          id="title">
+          <small
+            *ngIf="form.controls.title.invalid && (form.controls.title.dirty || form.controls.title.touched)"
+            class="form-text text-muted">
+            <span *ngIf="form.controls.title.errors.required">Title is required.</span>
+            <span *ngIf="form.controls.title.errors.maxlength">Max 200 characters</span>
+          </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="content" class="col-sm-2 col-form-label">Content</label>
+      <div class="col-sm-10">
+        <textarea
+          class="form-control"
+          formControlName="content"
+          placeholder="Content"
+          id="content"
+          required></textarea>
+          <small
+            *ngIf="form.controls.content.invalid && (form.controls.content.dirty || form.controls.content.touched)"
+            class="form-text text-muted">
+            Content is required.
+          </small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block">Submit</button>
+  </form>
+</div>
+
+<p>Value: {{ form.value | json }}</p>
+<p>Validation status: {{ form.status }}</p>
